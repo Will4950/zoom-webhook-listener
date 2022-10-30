@@ -19,7 +19,7 @@ This example app uses Node.js + Express to create a Zoom webhook event listener 
 
 ```bash
 # Clone this repository
-git clone git@github.com/Will4950/zoom-webhook-listener
+git clone https://github.com/Will4950/zoom-webhook-listener.git
 
 # Navigate into the cloned project directory
 cd zoom-webhook-listener
@@ -47,7 +47,7 @@ docker-compose up
 
 ```bash
 # Clone this repository
-git clone git@github.com/Will4950/zoom-webhook-listener
+git clone https://github.com/Will4950/zoom-webhook-listener.git
 
 # Navigate into the cloned project directory
 cd zoom-webhook-listener
