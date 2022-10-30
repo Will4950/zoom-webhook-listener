@@ -5,3 +5,4 @@ services:
     command: node ./src/index.js
     ports:
       - '8585:8585'
+      - '4040:4040'
