@@ -1,0 +1,7 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: node ./src/index.js
+    ports:
+      - '8585:8585'

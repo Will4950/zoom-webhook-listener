@@ -1,0 +1,111 @@
+extends _layout.pug
+block main
+	.container-fluid(style='max-width: 900px; min-width: 734px; margin-top: 40px').rounded-4.shadow-lg.border.bg-white
+		.row.pt-3.mx-2.text-midnight
+			.position-relative
+				.position-absolute.top-0.end-0
+					.row.gx-0.align-items-center.justify-content-end(data-bs-title='Configure additional settings' data-bs-toggle='tooltip' data-bs-placement='left')
+						.col
+							i.bi.bi-gear-fill.fs-3.ms-2.me-2(data-bs-target='#settingsModal' data-bs-toggle='modal' type='button')
+						.col
+							p.text-center.mb-0(data-bs-target='#settingsModal' data-bs-toggle='modal' type='button') Settings
+			.col
+				h1.fw-bold Zoom Webhook Listener					
+		.row.mx-2
+			.col
+				.row
+					p.mb-1.small.text-bloom080 Event notification endpoint URL
+				.row.row-cols-auto.gx-0 
+					.col
+						p#ngrokURL(copy=url) #{url}
+					.col
+						span.ps-1.copytoclip(data-bs-title='copy to clipboard' data-bs-toggle='tooltip' for='ngrokURL' type='button')
+							i.bi.bi-clipboard2
+			.col
+				p.mb-1.small.text-bloom080 ngrok - Inspect
+				a(href=api rel='noopener noreferrer' target='_blank') #{api}
+		.row.px-2
+			.position-relative
+				.position-absolute.top-0.start-0
+					.input-group.input-group-sm.ms-3.ps-1.pt-2
+						span.input-group-text Secret Token
+						input#secretToken.form-control.save.rounded-1(placeholder='Put your Secret Token here' type='password' value=secretToken)
+						span.btn.btn-secondary.showhidepw.ms-1.rounded-1(for='secretToken' type='button')
+							i.bi.bi-eye
+			.col.bg-perigee.pb-2.mx-2.rounded-3.border.shadow-sm
+				table#webhookTable.table-hover.table-sm(
+					data-buttons='webhookButtons'
+					data-detail-formatter='detailFormatter'
+					data-detail-view='true'
+					data-detail-view-by-click='true'
+					data-page-size=15
+					data-pagination='true'
+					data-pagination-parts=['pageInfo', 'pageList']
+					data-search='true'
+					data-toggle='table')
+					thead
+						tr
+							th(data-field='eventDescription') Webhook event log
+							th(data-field='eventData' data-visible='false')
+		.div.pb-4
+block modal
+	#modal_connecting.modal.fade(data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1')
+		.modal-dialog
+			.modal-content
+				.modal-header.bg-success
+					h5.modal-title.text-white
+						| Searching for socket
+				.modal-body
+					.d-flex.flex-row.justify-content-center
+						.mt-1.spinner-border(role='status' style='width: 16px; height: 16px')
+						| &nbsp;&nbsp;Connecting...
+				.modal-footer
+	#settingsModal.modal.fade(aria-hidden='true' aria-labelledby='settingsModalLabel' tabindex='-1')
+		.modal-dialog.modal-lg(style='max-width: 600px;')
+			.modal-content
+				.modal-header
+					h1#settingsModalLabel.modal-title.fs-5 Settings
+					button.btn-close(aria-label='Close' data-bs-dismiss='modal' type='button')
+				.modal-body
+					.container-fluid
+						.row.mb-4.mt-2
+							.col.bg-perigee.rounded-3.border.shadow-sm
+								.input-group.input-group-sm
+									label.form-label(for='input1') ngrok authtoken
+								.input-group.input-group-sm
+									input#authtoken.form-control.save(placeholder='Put your ngrok authtoken here' type='password' value=authtoken)
+									span.btn.btn-secondary.showhidepw(for='authtoken' type='button')
+										i.bi.bi-eye
+								.div.pt-1
+									p.small.text-center.text-muted Get your ngrok authtoken 
+										a(href='https://dashboard.ngrok.com/get-started/your-authtoken' rel='noopener noreferrer' target='_blank') here
+										| .  Your existing URL will be replaced.
+						.row.mb-2
+							.col.text-center.border.rounded-3.pt-3.pb-3.bg-perigee.shadow-sm
+								p.small This feature will forward all incoming webhook events to an external service.
+								p.text-center.small The HTTP POST method will be used to send webhook response bodies to the destination URL specified.  
+								p.text-center.small The 
+									span.font-monospace.bg-light Content-Type
+									|  header will be set to 
+									span.font-monospace.bg-light application/json
+									| .
+								p.text-center.small The 
+									span.font-monospace.bg-light Authorization
+									|  header will be omitted if left blank.
+								.input-group.input-group-sm.mt-2
+									label.form-label(for='destinationUrl') Destination URL
+								.input-group.input-group-sm.mb-2
+									input#destinationUrl.form-control.save(placeholder='Enter the external service URL here' value=destinationUrl)
+								.input-group.input-group-sm
+									label.form-label(for='authHeader') Authorization Header
+								.input-group.input-group-sm
+									input#authHeader.form-control.save(placeholder='Put your Authorization header here if required' value=authHeader)
+								.input-group.input-group-sm.mt-2
+									label.form-check-label(for='relayStatus') Enable event forwarding
+								.form-check.form-switch
+									if (relayStatus)
+										input#relayStatus.form-check-input.save(type='checkbox' role='switch' checked)
+									else 
+										input#relayStatus.form-check-input.save(type='checkbox' role='switch')
+				.modal-footer
+					button.btn.btn-secondary(aria-label='Close' data-bs-dismiss='modal' data-bs-target='#settingsModal' type='button') Close

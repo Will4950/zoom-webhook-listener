@@ -1,0 +1,8 @@
+.dockerignore
+node_modules
+Dockerfile
+client
+styles
+gulpfile.js
+.eslintrc.cjs
+.prettierrc.cjs

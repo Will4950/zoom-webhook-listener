@@ -1,0 +1,62 @@
+@use 'sass:map';
+@use 'node_modules/@fontsource/ubuntu/scss/mixins' as Ubuntu;
+
+@include Ubuntu.fontFace(
+	$weight: 400,
+	$display: swap,
+	$style: normal,
+	$fontDir: '../fonts'
+);
+
+$font-family-sans-serif: 'Ubuntu', sans-serif !default;
+$headings-font-family: 'Ubuntu', sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$theme-colors: (
+	'primary': #0b5cff,
+	'secondary': #274d83,
+	'success': #27874c,
+	'info': #ff7a00,
+	'warning': #676774,
+	'danger': #e02828,
+	'light': #f4f4f6,
+	'dark': #0d2a4c,
+	'bloom': #0b5cff,
+	'bloom080': #274d83,
+	'polar-night': #00031f,
+	'perigee': #f8f8fa,
+	'noon': #fffded,
+	'midnight': #00053d,
+);
+
+$enable-grid-classes: true;
+$enable-gradients: true;
+$enable-rounded: true;
+$enable-shadows: true;
+$bootstrap-icons-font-src: url('../fonts/bootstrap-icons.woff2') format('woff2') !default;
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-icons/font/bootstrap-icons';
+@import 'node_modules/bootstrap-table/dist/bootstrap-table';
+
+.active > .page-link {
+	background-color: map.get($theme-colors, 'bloom080');
+	border-color: map.get($theme-colors, 'bloom080');
+}
+
+.page-link {
+	color: map.get($theme-colors, 'bloom080');
+}
+
+a {
+	text-decoration: none;
+	color: map.get($theme-colors, 'primary');
+}
+
+a:hover {
+	color: map.get($theme-colors, 'info');
+}
+
+.input-group-text {
+	background: white;
+}
