@@ -144,12 +144,6 @@ $(() => {
 		save(event.currentTarget);
 	});
 
-	$('.copytoclip').on('click', (event) => {
-		const $target = $('#' + $(event.currentTarget).attr('for'));
-		navigator.clipboard.writeText($target.attr('copy'));
-		$(event.currentTarget).fadeOut('fast').fadeIn('fast');
-	});
-
 	$('.showhidepw').on('click', (event) => {
 		var target = $('#' + $(event.currentTarget).attr('for'));
 		var i = $(event.currentTarget).children('i');
@@ -163,6 +157,12 @@ $(() => {
 			i.removeClass('bi-eye-slash');
 		}
 	});
+});
+
+$('.copytoclip').on('click', (event) => {
+	const $target = $('#' + $(event.currentTarget).attr('for'));
+	navigator.clipboard.writeText($target.attr('copy'));
+	$(event.currentTarget).fadeOut('fast').fadeIn('fast');
 });
 
 window.addEventListener('pageshow', function (event) {
