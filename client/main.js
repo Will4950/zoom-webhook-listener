@@ -138,30 +138,31 @@ $(() => {
 	[...tooltipTriggerList].map(
 		(tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
 	);
+
 	$('.save').on('change', (event) => {
 		$(event.currentTarget).val($(event.currentTarget).val().replace(/\s/g, ''));
 		save(event.currentTarget);
 	});
-});
 
-$('.copytoclip').on('click', (event) => {
-	const $target = $('#' + $(event.currentTarget).attr('for'));
-	navigator.clipboard.writeText($target.attr('copy'));
-	$(event.currentTarget).fadeOut('fast').fadeIn('fast');
-});
+	$('.copytoclip').on('click', (event) => {
+		const $target = $('#' + $(event.currentTarget).attr('for'));
+		navigator.clipboard.writeText($target.attr('copy'));
+		$(event.currentTarget).fadeOut('fast').fadeIn('fast');
+	});
 
-$('.showhidepw').on('click', (event) => {
-	var target = $('#' + $(event.currentTarget).attr('for'));
-	var i = $(event.currentTarget).children('i');
-	if (target.attr('type') == 'password') {
-		target.attr('type', 'text');
-		i.addClass('bi-eye-slash');
-		i.removeClass('bi-eye');
-	} else {
-		target.attr('type', 'password');
-		i.addClass('bi-eye');
-		i.removeClass('bi-eye-slash');
-	}
+	$('.showhidepw').on('click', (event) => {
+		var target = $('#' + $(event.currentTarget).attr('for'));
+		var i = $(event.currentTarget).children('i');
+		if (target.attr('type') == 'password') {
+			target.attr('type', 'text');
+			i.addClass('bi-eye-slash');
+			i.removeClass('bi-eye');
+		} else {
+			target.attr('type', 'password');
+			i.addClass('bi-eye');
+			i.removeClass('bi-eye-slash');
+		}
+	});
 });
 
 window.addEventListener('pageshow', function (event) {
