@@ -3,6 +3,7 @@ services:
   web:
     build: .
     command: node ./src/index.js
+    network_mode: "host"
     ports:
       - '8585:8585'
       - '4040:4040'
